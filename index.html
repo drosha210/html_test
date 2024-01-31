@@ -25,21 +25,52 @@
 </script>
 
 <script type="text/typescript">
-    interface Test{
-        a: string;
-        b: number;
-        c: boolean;
+class dual_number{
+real: number
+imag: number
+    constructor(real: number, imag: number){
+    this.real = real;
+    this.imag = imag;
     }
-
-    const test:Test = {
-        a: "aaa",
-        b: 111,
-        c: true
-    };
-
-    await new Promise<void>(done => setTimeout(done, 100));
-    console.log(test);
-    document.getElementById("status").textContent = "Complete!";
+    con(){
+    const z: dual_number = new dual_number(this.real, -this.imag);
+    return z;
+    }
+    toString(){
+        if(this.imag >= 0){
+            const z: string = this.real.toString() + '+' + this.imag.toString() + 'ε';
+            return z;
+        }
+        else{
+            const z: string = this.real.toString() + this.imag.toString() + 'ε';
+            return z;
+        }
+    }
+}
+function add(x: dual_number, y: dual_number): dual_number{
+    const real = x.real + y.real;
+    const imag = x.imag + y.imag;
+    const z = new dual_number(real, imag);
+    return z;
+}
+function sub(x: dual_number, y: dual_number): dual_number{
+    const real = x.real - y.real;
+    const imag = x.imag - y.imag;
+    const z = new dual_number(real, imag);
+    return z;
+}
+function mul(x: dual_number, y: dual_number): dual_number{
+    const real = x.real * y.real;
+    const imag = x.real * y.imag + x.imag * y.real;
+    const z = new dual_number(real, imag);
+    return z;
+}
+function div(x: dual_number, y: dual_number): dual_number{
+    const k: dual_number = y.con();
+    const amia = new dual_number(1 / y.real * y.real, 0);
+    const z:dual_number = mul(x, mul(k,amia));
+    return z;
+}
 </script>
 </head>
 <body>
