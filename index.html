@@ -71,6 +71,14 @@ function div(x: dual_number, y: dual_number): dual_number{
     const z:dual_number = mul(x, mul(k,amia));
     return z;
 }
+let a = new dual_number(1,2)
+let b = new dual_number(2,4)
+let c = new dual_number(1,4)
+const d:dual_number = div(a,b)
+const e:dual_number = mul(a,c)
+const f:dual_number = add(d,e)
+const g:dual_number = sub(f,a)
+document.getElementById("status").textContent = g.tostring();
 </script>
 </head>
 <body>
